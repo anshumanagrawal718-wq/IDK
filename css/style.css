@@ -1,0 +1,881 @@
+/* =========================
+   Global Styles & Reset
+   ========================= */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  background: radial-gradient(circle at top left, #ffe4ec 0%, #fff5f8 35%, #ffe6f2 70%, #ffd9e8 100%);
+  color: #442233;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Google Font import */
+@import url("https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;500;600;700&display=swap");
+
+/* =========================
+   Preloader
+   ========================= */
+#preloader {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+
+#preloader.hide {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.heart-loader {
+  width: 60px;
+  height: 60px;
+  position: relative;
+  transform: rotate(-45deg);
+  animation: pulse 1s infinite;
+}
+
+.heart-loader::before,
+.heart-loader::after {
+  content: "";
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  background: #ff9a9e;
+  border-radius: 50%;
+}
+
+.heart-loader::before {
+  top: -30px;
+  left: 0;
+}
+
+.heart-loader::after {
+  left: 30px;
+  top: 0;
+}
+
+#preloader p {
+  margin-top: 16px;
+  color: #ffeef4;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-align: center;
+}
+
+/* =========================
+   Floating Hearts Background
+   ========================= */
+.floating-hearts {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.floating-hearts span {
+  position: absolute;
+  bottom: -40px;
+  width: 18px;
+  height: 18px;
+  background: radial-gradient(circle at 30% 30%, #fff, #ff9a9e);
+  transform: rotate(-45deg);
+  border-radius: 4px;
+  opacity: 0.7;
+  animation: floatUp 8s linear infinite;
+}
+
+.floating-hearts span::before,
+.floating-hearts span::after {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: inherit;
+}
+
+.floating-hearts span::before {
+  top: -9px;
+  left: 0;
+}
+
+.floating-hearts span::after {
+  left: 9px;
+  top: 0;
+}
+
+/* Different positions & delays */
+.floating-hearts span:nth-child(1) {
+  left: 10%;
+  animation-duration: 10s;
+}
+.floating-hearts span:nth-child(2) {
+  left: 25%;
+  animation-duration: 12s;
+  animation-delay: 1s;
+}
+.floating-hearts span:nth-child(3) {
+  left: 40%;
+  animation-duration: 9s;
+  animation-delay: 2s;
+}
+.floating-hearts span:nth-child(4) {
+  left: 60%;
+  animation-duration: 11s;
+  animation-delay: 1.5s;
+}
+.floating-hearts span:nth-child(5) {
+  left: 80%;
+  animation-duration: 13s;
+  animation-delay: 0.5s;
+}
+
+/* =========================
+   Layout - Header/Footer
+   ========================= */
+.main-header {
+  position: relative;
+  z-index: 2;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  backdrop-filter: blur(10px);
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.65), rgba(255, 213, 230, 0.75));
+  border-bottom: 1px solid rgba(255, 192, 203, 0.6);
+}
+
+.logo-text {
+  font-family: "Great Vibes", cursive;
+  font-size: 1.6rem;
+  color: #d64571;
+}
+
+.header-subtitle {
+  font-size: 0.8rem;
+  color: #7a4f66;
+}
+
+.main-nav {
+  display: flex;
+  gap: 8px;
+}
+
+.main-nav a {
+  text-decoration: none;
+  font-size: 0.9rem;
+  color: #7a3554;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(255, 192, 203, 0.7);
+  box-shadow: 0 8px 20px rgba(255, 173, 200, 0.4);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.main-nav a:hover {
+  transform: translateY(-1px) scale(1.02);
+  box-shadow: 0 10px 24px rgba(255, 173, 200, 0.6);
+}
+
+main {
+  position: relative;
+  z-index: 2;
+  padding: 20px 16px 40px;
+  flex: 1;
+}
+
+.main-footer {
+  position: relative;
+  z-index: 2;
+  padding: 12px 16px;
+  font-size: 0.8rem;
+  text-align: center;
+  color: #79455c;
+  background: rgba(255, 255, 255, 0.7);
+  border-top: 1px solid rgba(255, 192, 203, 0.6);
+}
+
+/* =========================
+   Buttons & Utilities
+   ========================= */
+.btn,
+.bg-music-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #fff;
+  background: linear-gradient(135deg, #ff9a9e, #fecfef);
+  box-shadow: 0 10px 24px rgba(255, 137, 172, 0.6);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s;
+  text-decoration: none;
+}
+
+.btn:hover,
+.bg-music-toggle:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 30px rgba(255, 137, 172, 0.8);
+  filter: brightness(1.05);
+}
+
+.btn-outline {
+  background: transparent;
+  color: #d64571;
+  border: 1px solid rgba(214, 69, 113, 0.6);
+  box-shadow: none;
+}
+
+.btn-outline:hover {
+  background: rgba(255, 255, 255, 0.85);
+}
+
+/* when bg music is playing (lofi heartbeat vibe) */
+.bg-music-toggle.playing {
+  box-shadow: 0 0 0 0 rgba(255, 137, 172, 0.8);
+  animation: heartbeat 1.1s infinite;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  border: 1px solid rgba(214, 69, 113, 0.4);
+  background: rgba(255, 255, 255, 0.85);
+}
+
+/* =========================
+   Home: Hero Section
+   ========================= */
+.hero {
+  max-width: 900px;
+  margin: 0 auto 24px;
+  padding: 20px 18px;
+  border-radius: 24px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 221, 234, 0.95));
+  box-shadow: 0 20px 45px rgba(255, 173, 200, 0.55);
+  text-align: center;
+  animation: fadeInUp 0.85s ease-out both;
+}
+
+.hero-title {
+  font-family: "Great Vibes", cursive;
+  font-size: 2.3rem;
+  color: #c12861;
+  margin-bottom: 8px;
+}
+
+.hero-subtitle {
+  font-size: 1rem;
+  color: #7b3c5c;
+  margin-bottom: 14px;
+}
+
+.hero-badge {
+  margin-bottom: 10px;
+}
+
+.hero-dates {
+  font-size: 0.9rem;
+  color: #8a5067;
+  margin-bottom: 16px;
+}
+
+.hero-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+/* Countdown */
+.countdown-card {
+  margin: 16px auto 24px;
+  max-width: 500px;
+  padding: 16px 20px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(255, 192, 203, 0.2), rgba(255, 255, 255, 0.95));
+  box-shadow: 0 16px 30px rgba(255, 174, 188, 0.5);
+  text-align: center;
+}
+
+.countdown-label {
+  font-size: 0.85rem;
+  color: #9a5b74;
+  margin-bottom: 6px;
+}
+
+#countdown {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #b3265c;
+}
+
+/* =========================
+   Home: Memory Grid
+   ========================= */
+.memory-grid {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.section-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #b12c63;
+  margin-bottom: 4px;
+  text-align: center;
+}
+
+.section-subtitle {
+  font-size: 0.85rem;
+  color: #8b5670;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.grid {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: 1fr;
+}
+
+.memory-card {
+  position: relative;
+  padding: 14px 14px 16px;
+  border-radius: 18px;
+  background: radial-gradient(circle at top left, #fff, #ffe3ef);
+  border: 1px solid rgba(255, 182, 193, 0.7);
+  box-shadow: 0 12px 26px rgba(255, 174, 188, 0.55);
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.memory-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top right, rgba(255, 255, 255, 0.8), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.memory-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 34px rgba(255, 145, 175, 0.65);
+}
+
+.memory-card:hover::before {
+  opacity: 1;
+}
+
+.memory-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 4px;
+}
+
+.memory-day {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #b12c63;
+}
+
+.memory-date {
+  font-size: 0.8rem;
+  color: #8b5670;
+}
+
+.memory-desc {
+  font-size: 0.85rem;
+  color: #6e3f56;
+  margin-bottom: 10px;
+}
+
+.memory-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* =========================
+   Memory Pages
+   ========================= */
+.memory-page {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.memory-header {
+  margin-bottom: 18px;
+  padding: 18px 16px;
+  border-radius: 22px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 210, 229, 0.98));
+  box-shadow: 0 16px 34px rgba(255, 145, 175, 0.6);
+  text-align: center;
+}
+
+.memory-header-title {
+  font-family: "Great Vibes", cursive;
+  font-size: 2rem;
+  color: #bf215c;
+  margin-bottom: 4px;
+}
+
+.memory-header-meta {
+  font-size: 0.85rem;
+  color: #8a4f6a;
+}
+
+.memory-content {
+  padding: 18px 14px 22px;
+  border-radius: 24px;
+  background: radial-gradient(circle at top left, #fff, #ffe6f3);
+  box-shadow: 0 18px 40px rgba(255, 159, 189, 0.6);
+  animation: fadeInSoft 0.9s ease-out both;
+}
+
+/* Locked Message */
+.locked-message {
+  display: none;
+  min-height: 60vh;
+  border-radius: 24px;
+  padding: 24px 16px;
+  background: radial-gradient(circle at top, #fff, #ffe1ed);
+  box-shadow: 0 18px 40px rgba(255, 159, 189, 0.6);
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.locked-emoji {
+  font-size: 2.3rem;
+}
+
+.locked-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #b12c63;
+}
+
+.locked-text {
+  font-size: 0.9rem;
+  color: #7e4a64;
+}
+
+/* Picture section */
+.memory-image-wrapper {
+  margin-bottom: 16px;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 18px 36px rgba(255, 145, 175, 0.7);
+}
+
+.memory-image-wrapper img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  transform: scale(1.02);
+  transition: transform 0.6s ease;
+}
+
+.memory-image-wrapper:hover img {
+  transform: scale(1.06);
+}
+
+/* Text section */
+.memory-text {
+  margin-bottom: 18px;
+}
+
+.memory-text h2 {
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+  color: #b12c63;
+}
+
+.memory-text p {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: #5f364b;
+  margin-bottom: 8px;
+}
+
+/* Music section */
+.music-section {
+  margin-bottom: 18px;
+  padding: 14px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 213, 231, 0.95));
+  border: 1px solid rgba(255, 192, 203, 0.6);
+}
+
+.music-section h3 {
+  font-size: 1rem;
+  margin-bottom: 6px;
+  color: #b12c63;
+}
+
+.music-section p {
+  font-size: 0.85rem;
+  color: #764560;
+  margin-bottom: 10px;
+}
+
+.custom-audio-player {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.custom-audio-player .play-btn {
+  min-width: 140px;
+}
+
+.audio-label {
+  font-size: 0.8rem;
+  color: #8a5671;
+}
+
+/* Navigation links in memory pages */
+.memory-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+/* =========================
+   Day 7 - Heart Explosion
+   ========================= */
+#heart-explosion-container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 3;
+}
+
+.burst-heart {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  background: radial-gradient(circle at 30% 30%, #fff, #ff6a88);
+  transform: rotate(-45deg);
+  border-radius: 4px;
+  animation: heartBurst 1.6s ease-out forwards;
+}
+
+.burst-heart::before,
+.burst-heart::after {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: inherit;
+}
+
+.burst-heart::before {
+  top: -9px;
+  left: 0;
+}
+
+.burst-heart::after {
+  left: 9px;
+  top: 0;
+}
+
+/* =========================
+   Animations (Base)
+   ========================= */
+@keyframes pulse {
+  0%,
+  100% {
+    transform: rotate(-45deg) scale(1);
+  }
+  50% {
+    transform: rotate(-45deg) scale(1.15);
+  }
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) scale(0.9);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-120vh) scale(1.2);
+    opacity: 0;
+  }
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInSoft {
+  0% {
+    opacity: 0;
+    transform: translateY(16px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes heartBurst {
+  0% {
+    transform: translate(0, 0) scale(0.4) rotate(-45deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--tx, 0), var(--ty, -200px)) scale(1.4) rotate(-45deg);
+    opacity: 0;
+  }
+}
+
+/* =========================
+   Responsive
+   ========================= */
+@media (min-width: 600px) {
+  .hero {
+    padding: 26px 30px;
+  }
+
+  .hero-title {
+    font-size: 2.8rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1.05rem;
+  }
+
+  .hero-actions {
+    flex-direction: row;
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 900px) {
+  main {
+    padding: 28px 24px 50px;
+  }
+
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .memory-page {
+    padding-inline: 10px;
+  }
+}
+
+/* ===========================================================
+   LEVEL 3 UPGRADES
+   =========================================================== */
+
+/* ---------- 1. Page Curtain (cinematic opening) ---------- */
+.page-curtain {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at top, #ffdde8, #ee9ca7);
+  z-index: 2000;
+  transform: translateY(0);
+  animation: curtainOpen 1.2s ease-in-out forwards;
+  pointer-events: none;
+}
+
+@keyframes curtainOpen {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}
+
+/* ---------- 2. Cursor / touch mini-hearts ---------- */
+.cursor-heart {
+  position: fixed;
+  width: 14px;
+  height: 14px;
+  background: radial-gradient(circle at 30% 30%, #fff, #ff6a88);
+  transform: translate(-50%, -50%) rotate(-45deg);
+  border-radius: 4px;
+  pointer-events: none;
+  z-index: 1500;
+  animation: cursorHeart 0.8s ease-out forwards;
+}
+
+.cursor-heart::before,
+.cursor-heart::after {
+  content: "";
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: inherit;
+}
+
+.cursor-heart::before {
+  top: -7px;
+  left: 0;
+}
+
+.cursor-heart::after {
+  left: 7px;
+  top: 0;
+}
+
+@keyframes cursorHeart {
+  0% {
+    opacity: 0.9;
+    transform: translate(-50%, -50%) scale(0.8) rotate(-45deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -80%) scale(1.3) rotate(-45deg);
+  }
+}
+
+/* ---------- 3. Hold-to-Reveal Overlay on memory text ---------- */
+.memory-text {
+  position: relative;
+}
+
+.hold-reveal-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top, rgba(255, 255, 255, 0.97), rgba(255, 192, 203, 0.96));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 18px;
+  box-shadow: 0 18px 36px rgba(255, 145, 175, 0.5);
+  cursor: pointer;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+  z-index: 3;
+}
+
+.hold-reveal-inner {
+  text-align: center;
+}
+
+.hold-heart {
+  font-size: 1.9rem;
+  color: #d64571;
+  margin-bottom: 6px;
+  animation: heartbeat 1.1s infinite;
+}
+
+.hold-text {
+  font-size: 0.9rem;
+  color: #81425d;
+}
+
+.hold-reveal-overlay.holding {
+  transform: scale(0.98);
+}
+
+.hold-reveal-overlay.revealed {
+  opacity: 0;
+  transform: scale(1.04);
+  pointer-events: none;
+}
+
+/* ---------- 4. Heartbeat animation (used in multiple places) ---------- */
+@keyframes heartbeat {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(1.12);
+  }
+  50% {
+    transform: scale(0.96);
+  }
+  75% {
+    transform: scale(1.08);
+  }
+}
+
+/* ---------- 5. Day 7 Love-letter paragraph reveal ---------- */
+body[data-page="day7"] .memory-text p {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+
+body[data-page="day7"] .memory-text p.love-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---------- 6. Small polish tweaks ---------- */
+.memory-card {
+  backdrop-filter: blur(4px);
+}
+
+.memory-content {
+  backdrop-filter: blur(6px);
+}
+
+.music-section {
+  backdrop-filter: blur(4px);
+}
